@@ -17,14 +17,14 @@ scholar:
     # bibliography_template: bibtemplate
 
 # Social networks usernames (many more available: google-plus, flickr, dribbble, pinterest, instagram, tumblr, linkedin, etc.)
-social:
-  - title: github
-    url: http://github.com/ghlim
-  - title: envelope
-    url: mailto:gihyun.lim@manchester.ac.uk
 academi:
   - title: google-scholar
     url: https://scholar.google.co.uk/citations?user=cND1p2oAAAAJ 
+social:
+  - title: envelope
+    url: mailto:gihyun.lim@manchester.ac.uk
+  - title: github
+    url: http://github.com/ghlim
 
 # Postal address (add as many lines as necessary)
 address:

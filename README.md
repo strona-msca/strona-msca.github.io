@@ -1,4 +1,6 @@
 STRoNA Project
 =========================
 
-Powered by Jekyll
+Hosted at https://strona-msca.github.io/
+
+Powered by Jekyll and D3.js
