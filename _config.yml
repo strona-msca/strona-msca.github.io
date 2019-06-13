@@ -37,5 +37,5 @@ plugins:
   - jekyll-feed
 
 # Build settings
-markdown: kramdown
+markdown: GFM
 permalink: pretty
