@@ -1,0 +1,12 @@
+---
+layout: default
+modal-id: 0
+date: 29 January 2018
+img: logo_ce-en-rvb-hr.jpg
+alt: Evaluation results and start of grant preparation 
+category: Project
+title: Evaluation results and start of grant preparation 
+link: https://cordis.europa.eu/programme/rcn/664113/en
+description: The STRoNA proposal has reached the stage of Grant Agreement preparation.
+
+---

@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>STRoNA</title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="description" content="Spatio-Temporal Representation on Neuromorphic Architecture">
+    <link rel="canonical" href="http://localhost:4000/">
+
+    <link rel="stylesheet" href="/style.css">
+
+    <link rel="stylesheet" href="/css/academicons/css/academicons.min.css"/>
+    <!-- <link rel="stylesheet" href="/css/academicons/css/academicons.min.css"> -->
+    
+    <!-- Custom Fonts -->
+    <link rel="stylesheet" href="/css/font-awesome/css/font-awesome.min.css">
+    <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+
+
+    <body id="page-top" class="index">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="#page-top"></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#news">News</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#publications">Publications</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="intro-text">
+                <div class="intro-lead-in">Spatio-Temporal Representation on Neuromorphic Architecture</div>
+                <div class="intro-heading">STRoNA</div>
+                <a href="#news" class="page-scroll btn btn-xl">Details</a>
+            </div>
+        </div>
+    </header>
+<!--
+        
+          
+        
+          
+        
+          
+        
+          <a class="page-link" href="/css/academicons/">What is Academicons?</a>
+        
+          
+        
+ -->
+
+
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+		<title>D3: A simple packed Bubble Chart</title>
+		<script type="text/javascript" src="https://d3js.org/d3.v4.min.js"></script>
+
+		<style type="text/css">
+			/* No style rules here yet */		
+		</style>
+</head>
+<body><center>
+	<script type="text/javascript">
+
+        dataset = {
+            "children": [{"Name":"STRoNA","Count":481},
+                {"Name":"Representation","Count":355},
+                {"Name":"Temporal","Count":258},
+                {"Name":"Spatial","Count":207},
+                {"Name":"Robots","Count":189},
+                {"Name":"SpiNNaker","Count":180},
+                {"Name":"Neuromorphic","Count":171},
+                {"Name":"iCub robot","Count":163},
+                {"Name":"Spiking neural networks","Count":156},
+                {"Name":"Vidual pathways","Count":151},
+                {"Name":"Brain","Count":148},
+                {"Name":"Eye","Count":148},
+                {"Name":"Human","Count":142},
+                {"Name":"Cognition","Count":137},
+                {"Name":"Plasticity","Count":134},
+                {"Name":"Deep learning","Count":133},
+                {"Name":"Development","Count":130},
+                {"Name":"Language","Count":126}]
+        };
+
+        // var diameter = 600;
+        var diameter = window.innerWidth * 0.98;
+        var color = d3.scaleOrdinal(d3.schemeCategory20);
+
+        var bubble = d3.pack(dataset)
+            .size([diameter, diameter])
+            .padding(1.5);
+
+        var svg = d3.select("body")
+            .append("svg")
+            .attr("width", diameter)
+            .attr("height", diameter)
+            .attr("class", "bubble");
+
+        var nodes = d3.hierarchy(dataset)
+            .sum(function(d) { return d.Count; });
+
+        var node = svg.selectAll(".node")
+            .data(bubble(nodes).descendants())
+            .enter()
+            .filter(function(d){
+                return  !d.children
+            })
+            .append("g")
+            .attr("class", "node")
+            .attr("transform", function(d) {
+                return "translate(" + d.x + "," + d.y + ")";
+            });
+
+        node.append("title")
+            .text(function(d) {
+                return d.Name + ": " + d.Count;
+            });
+
+        node.append("circle")
+            .attr("r", function(d) {
+                return d.r;
+            })
+            .style("fill", function(d,i) {
+                return color(i);
+            });
+
+        node.append("text")
+            .attr("dy", ".2em")
+            .style("text-anchor", "middle")
+            .text(function(d) {
+                return d.data.Name.substring(0, d.r / 3);
+            })
+            .attr("font-family", "sans-serif")
+            .attr("font-size", function(d){
+                return d.r/5;
+            })
+            .attr("fill", "white");
+
+        // node.append("text")
+        //     .attr("dy", "1.3em")
+        //     .style("text-anchor", "middle")
+        //     .text(function(d) {
+        //         return d.data.Count;
+        //     })
+        //     .attr("font-family",  "Gill Sans", "Gill Sans MT")
+        //     .attr("font-size", function(d){
+        //         return d.r/5;
+        //     })
+        //     .attr("fill", "white");
+
+        d3.select(self.frameElement)
+            .style("height", diameter + "px");
+
+
+
+	</script>
+</center></body>
+</html>
+
+    <!-- News Grid Section -->
+    <section id="news" class="bg-png">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">news</h2>
+                    <h3 class="section-subheading text-muted">Project news</h3>
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col-md-4 col-sm-6 news-item">
+                    <a href="#newsModal0" class="news-link" data-toggle="modal">
+                        <div class="news-hover">
+                            <div class="news-hover-content">
+                                <i class="fa fa-plus fa-3x"></i>
+                            </div>
+                        </div>
+                        <img src="img/news/logo_ce-en-rvb-hr.jpg" class="img-responsive" alt="">
+                    </a>
+                    <div class="news-caption">
+                        <h4>H2020-EU.1.3.2.</h4>
+                        <p class="text-muted">Nurturing excellence by means of cross-border and cross-sector mobility</p>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-sm-6 news-item">
+                    <a href="#newsModal1" class="news-link" data-toggle="modal">
+                        <div class="news-hover">
+                            <div class="news-hover-content">
+                                <i class="fa fa-plus fa-3x"></i>
+                            </div>
+                        </div>
+                        <img src="img/news/kb_uom_h.jpg" class="img-responsive" alt="">
+                    </a>
+                    <div class="news-caption">
+                        <h4>MSCA-IF-2017</h4>
+                        <p class="text-muted">Individual Fellowships: STRoNA</p>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-sm-6 news-item">
+                    <a href="#newsModal2" class="news-link" data-toggle="modal">
+                        <div class="news-hover">
+                            <div class="news-hover-content">
+                                <i class="fa fa-plus fa-3x"></i>
+                            </div>
+                        </div>
+                        <img src="img/news/robots.jpg" class="img-responsive" alt="">
+                    </a>
+                    <div class="news-caption">
+                        <h4>STRoNA</h4>
+                        <p class="text-muted">Spatio-Temporal Representation on Neuromorphic Architecture</p>
+                    </div>
+                </div>
+
+                
+            </div>
+             <div class="row">
+
+                
+
+                <div class="col-md-4 col-sm-6 news-item">
+                    <a href="#newsModal3" class="news-link" data-toggle="modal">
+                        <div class="news-hover">
+                            <div class="news-hover-content">
+                                <i class="fa fa-plus fa-3x"></i>
+                            </div>
+                        </div>
+                        <img src="img/news/spinnaker1M.jpg" class="img-responsive" alt="">
+                    </a>
+                    <div class="news-caption">
+                        <h4>Kick-off</h4>
+                        <p class="text-muted">Meeting</p>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-sm-6 news-item">
+                    <a href="#newsModal4" class="news-link" data-toggle="modal">
+                        <div class="news-hover">
+                            <div class="news-hover-content">
+                                <i class="fa fa-plus fa-3x"></i>
+                            </div>
+                        </div>
+                        <img src="img/news/ELS_NonSolus.gif" class="img-responsive" alt="">
+                    </a>
+                    <div class="news-caption">
+                        <h4>Journal publication</h4>
+                        <p class="text-muted">Robotics and Autonomous Systems</p>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-sm-6 news-item">
+                    <a href="#newsModal5" class="news-link" data-toggle="modal">
+                        <div class="news-hover">
+                            <div class="news-hover-content">
+                                <i class="fa fa-plus fa-3x"></i>
+                            </div>
+                        </div>
+                        <img src="img/news/tf.jpg" class="img-responsive" alt="">
+                    </a>
+                    <div class="news-caption">
+                        <h4>Journal publication</h4>
+                        <p class="text-muted">Advanced Robotics</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Publications Section -->
+    <section id="publications">
+
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">Publications</h2>
+                    <h3 class="section-subheading text-muted">Highlights</h3>
+                </div>
+            </div>
+            <!-- <div class="row"> -->
+            <!--     <div class="col&#45;lg&#45;12 text&#45;center"> -->
+            <!--         <h2 class="section&#45;heading">All publications</h2> -->
+            <!--         <h3 class="section&#45;subheading text&#45;muted"><a href="publications/">Publications</a></h3> -->
+            <!--     </div> -->
+            <!-- </div> -->
+        </div>
+    </section>
+
+     <!-- Contact Section -->
+    <section id="contact">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">Contact Me</h2>
+                    <h3 class="section-subheading text-muted">Stand on the shoulders of giants</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                        <ul class="list-inline">
+                            
+                            <li>
+                                <a href="http://github.com/ghlim" class="btn-social btn-outline"><i class="fa fa-5x fa-github"></i></a>
+                            </li>
+                            
+                            <li>
+                                <a href="mailto:gihyun.lim@manchester.ac.uk" class="btn-social btn-outline"><i class="fa fa-5x fa-envelope"></i></a>
+                            </li>
+                            
+                            
+                            <li>
+                                <a href="https://scholar.google.co.uk/citations?user=cND1p2oAAAAJ" class="btn-academi btn-outline"><i class="ai ai-google-scholar-square ai-5x"></i></a>
+                            </li>
+                            
+                        </ul>
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+
+        <!-- Footer -->
+    <footer class="text-center">
+        <div class="footer-above">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <div id="logo">
+                            <a href="https://cordis.europa.eu/programme/rcn/664113/en" title="Links to EC Horizon 2020" width="129" >
+                            <img src="../img/logo_ce-en-rvb-hr.jpg" alt="Logo of Cognitive Robotics Lab" height="82" /></a>
+                           
+                            <a href="http://www.manchester.ac.uk" title="Links to university home page" width="129" >
+                            <img src="http://www.manchester.ac.uk/medialibrary/images/corporate/logomanchester.gif" alt="Logo of University of Manchester, established 1824, links to university home page" height="64" /></a>
+                        
+                            <a href="https://corolab.github.io/" title="Links to Cognitive Robotics Lab" width="129" >
+                            <img src="../img/corolab.jpg" alt="Logo of Cognitive Robotics Lab" height="82" /></a>
+                        
+                            <a href="http://apt.cs.manchester.ac.uk/" title="Links to APT group" width="129" >
+                            <img src="../img/Rotating_Doughnut_s2.gif" alt="Logo of APT group" height="82" /></a>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="footer-col col-md-4">
+                        <h3>Location</h3>
+                        <p>
+                            
+                                Kilburn Building <br>
+		                    
+                                University of Manchester <br>
+		                    
+                                Manchester M13 9PL, UK <br>
+		                    
+                        </p>
+                    </div>
+                    <div class="footer-col col-md-4">
+                        
+                    </div>
+                    <div class="footer-col col-md-4">
+                        <h3>Powered By:</h3>
+                        <p><a href="http://jekyllrb.com/">Jekyll</a></p>
+                        <p><a href="https://pages.github.com/">GitHub Pages</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-below">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        Copyright &copy; STRoNA 2019
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes) -->
+    <div class="scroll-top page-scroll visible-xs visble-sm">
+        <a class="btn btn-primary" href="#page-top">
+            <i class="fa fa-chevron-up"></i>
+        </a>
+    </div>
+
+     <!-- News Modals -->
+ 
+    <div class="news-modal modal fade" id="newsModal5" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="modal-body">
+                            <h2>Advanced Robotics</h2>
+                            <hr class="star-primary">
+                            <a href="" target="_blank"><img src="img/news/TADR.jpg" class="img-responsive img-centered" alt="TADR"></a>
+                            <p>Precise and efficient pose estimation of stacked objects for mobile manipulation in industrial robotics challenges</p>
+                            <ul class="list-inline item-details">
+                                <li>Category:
+                                    <strong><a>Publication</a>
+                                    </strong>
+                                </li>
+                                <li>URL:
+                                    <strong><a href="https://www.tandfonline.com/doi/full/10.1080/01691864.2019.1617780" target="_blank">Advanced Robotics</a>
+                                    </strong>
+                                </li>
+                                <li>Date:
+                                    <strong><a>2019-05-22 00:00:00 +0100</a>
+                                    </strong>
+                                </li>
+                            </ul>
+                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="news-modal modal fade" id="newsModal4" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="modal-body">
+                            <h2>Robotics and Autonomous Systems</h2>
+                            <hr class="star-primary">
+                            <a href="" target="_blank"><img src="img/news/RAS_els.jpg" class="img-responsive img-centered" alt="RAS"></a>
+                            <p>Shared representations of actions for alternative suggestion with incomplete information.</p>
+                            <ul class="list-inline item-details">
+                                <li>Category:
+                                    <strong><a>Publication</a>
+                                    </strong>
+                                </li>
+                                <li>URL:
+                                    <strong><a href="https://www.sciencedirect.com/science/article/pii/S0921889018303397" target="_blank">Robotics and Autonomous Systems</a>
+                                    </strong>
+                                </li>
+                                <li>Date:
+                                    <strong><a>2019-03-14 00:00:00 +0000</a>
+                                    </strong>
+                                </li>
+                            </ul>
+                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="news-modal modal fade" id="newsModal3" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="modal-body">
+                            <h2>STRoNA</h2>
+                            <hr class="star-primary">
+                            <a href="" target="_blank"><img src="img/news/iCub.jpg" class="img-responsive img-centered" alt="Kick-off meeting"></a>
+                            <p>Prof. Angelo Cangelosi organized the kick-off meeting for STRoNA with Prof. Steve Furber.</p>
+                            <ul class="list-inline item-details">
+                                <li>Category:
+                                    <strong><a>Project</a>
+                                    </strong>
+                                </li>
+                                <li>URL:
+                                    <strong><a href="javascript:void(0);" target="_blank">STRoNA</a>
+                                    </strong>
+                                </li>
+                                <li>Date:
+                                    <strong><a>2018-11-22 00:00:00 +0000</a>
+                                    </strong>
+                                </li>
+                            </ul>
+                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="news-modal modal fade" id="newsModal2" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="modal-body">
+                            <h2>STRoNA Launching</h2>
+                            <hr class="star-primary">
+                            <a href="" target="_blank"><img src="img/news/corolab.jpg" class="img-responsive img-centered" alt="Project Launching"></a>
+                            <p>The MSCA-IF project STRoNA has launched.</p>
+                            <ul class="list-inline item-details">
+                                <li>Category:
+                                    <strong><a>Project</a>
+                                    </strong>
+                                </li>
+                                <li>URL:
+                                    <strong><a href="https://cordis.europa.eu/project/rcn/215256/factsheet/en" target="_blank">STRoNA Launching</a>
+                                    </strong>
+                                </li>
+                                <li>Date:
+                                    <strong><a>2018-10-23 00:00:00 +0100</a>
+                                    </strong>
+                                </li>
+                            </ul>
+                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="news-modal modal fade" id="newsModal1" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="modal-body">
+                            <h2>Grant Agreement</h2>
+                            <hr class="star-primary">
+                            <a href="" target="_blank"><img src="img/news/kilburn_UoM.jpg" class="img-responsive img-centered" alt="Grant Agreement"></a>
+                            <p>EU project 794425 - STRoNA; Grant Agreement has been signed by the European Commission and the University of Manchester.</p>
+                            <ul class="list-inline item-details">
+                                <li>Category:
+                                    <strong><a>Project</a>
+                                    </strong>
+                                </li>
+                                <li>URL:
+                                    <strong><a href="https://cordis.europa.eu/programme/rcn/702030/en" target="_blank">Grant Agreement</a>
+                                    </strong>
+                                </li>
+                                <li>Date:
+                                    <strong><a>2018-04-16 00:00:00 +0100</a>
+                                    </strong>
+                                </li>
+                            </ul>
+                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="news-modal modal fade" id="newsModal0" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="modal-body">
+                            <h2>Evaluation results and start of grant preparation</h2>
+                            <hr class="star-primary">
+                            <a href="" target="_blank"><img src="img/news/logo_ce-en-rvb-hr.jpg" class="img-responsive img-centered" alt="Evaluation results and start of grant preparation"></a>
+                            <p>The STRoNA proposal has reached the stage of Grant Agreement preparation.</p>
+                            <ul class="list-inline item-details">
+                                <li>Category:
+                                    <strong><a>Project</a>
+                                    </strong>
+                                </li>
+                                <li>URL:
+                                    <strong><a href="https://cordis.europa.eu/programme/rcn/664113/en" target="_blank">Evaluation results and start of grant preparation</a>
+                                    </strong>
+                                </li>
+                                <li>Date:
+                                    <strong><a>2018-01-29 00:00:00 +0000</a>
+                                    </strong>
+                                </li>
+                            </ul>
+                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+     <!-- jQuery Version 1.11.0 -->
+    <script src="/js/jquery-1.11.0.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/js/bootstrap.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="/js/jquery.easing.min.js"></script>
+    <script src="/js/classie.js"></script>
+    <script src="/js/cbpAnimatedHeader.js"></script>
+
+    <!-- Contact Form JavaScript -->
+    <script src="/js/jqBootstrapValidation.js"></script>
+    <script src="/js/contact_me.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="/js/agency.js"></script>
+
+
+    </body>
+</html>
